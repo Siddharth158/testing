@@ -21,7 +21,6 @@ const App = () => {
                 setLocation({
                     latitude,
                     longitude,
-                    altitude: altitude || "Not Available",
                     
                 });
 
