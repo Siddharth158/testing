@@ -10,7 +10,7 @@ const App = () => {
     });
 
     const getElevation = async (latitude, longitude) => {
-        const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=AIzaSyDsb3OAJ8D6H654WfnMj_wMjZN0RhLFJZ8`;
+       // const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=AIzaSyDsb3OAJ8D6H654WfnMj_wMjZN0RhLFJZ8`;
         try {
             const response = await fetch(apiUrl);
             const data = await response.json();
