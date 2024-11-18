@@ -4,34 +4,10 @@ const App = () => {
     const [location, setLocation] = useState({
         latitude: null,
         longitude: null,
-        altitude: null,
         error: null,
-        elevation: null,
     });
 
-    const getElevation = async (latitude, longitude) => {
-       // const apiUrl = `https://maps.googleapis.com/maps/api/elevation/json?locations=${latitude},${longitude}&key=AIzaSyDsb3OAJ8D6H654WfnMj_wMjZN0RhLFJZ8`;
-        try {
-            const response = await fetch(apiUrl);
-            const data = await response.json();
-            if (data.results && data.results.length > 0) {
-                setLocation((prevState) => ({
-                    ...prevState,
-                    elevation: data.results[0].elevation,
-                }));
-            } else {
-                setLocation((prevState) => ({
-                    ...prevState,
-                    elevation: "Elevation data not available",
-                }));
-            }
-        } catch (error) {
-            setLocation((prevState) => ({
-                ...prevState,
-                elevation: `Error fetching elevation: ${error.message}`,
-            }));
-        }
-    };
+   
 
     const getLocation = async () => {
         if (!navigator.geolocation) {
@@ -41,13 +17,12 @@ const App = () => {
 
         navigator.geolocation.getCurrentPosition(
             async (position) => {
-                const { latitude, longitude, altitude } = position.coords;
+                const { latitude, longitude } = position.coords;
                 setLocation({
                     latitude,
                     longitude,
                     altitude: altitude || "Not Available",
-                    error: null,
-                    elevation: null,
+                    
                 });
 
                 // Fetch elevation data
@@ -76,10 +51,6 @@ const App = () => {
                     <div>
                         <p>Latitude: {location.latitude}</p>
                         <p>Longitude: {location.longitude}</p>
-                        <p>Altitude: {location.altitude}</p>
-                        {location.elevation !== null && (
-                            <p>Elevation: {location.elevation}</p>
-                        )}
                     </div>
                 )}
             </div>
